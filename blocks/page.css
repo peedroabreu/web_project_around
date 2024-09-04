@@ -1,0 +1,26 @@
+.page {
+  background-color: rgba(0, 0, 0, 1);
+
+  align-content: center;
+  color: rgba(255, 255, 255, 1);
+
+  font-family: "Inter", "Sans-serif";
+}
+
+@media screen and (max-width: 1024px) {
+  .page {
+    height: auto;
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .page {
+    padding-right: 0;
+    width: 100%;
+  }
+
+  .footer__text {
+    margin-left: 0;
+  }
+}

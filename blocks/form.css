@@ -1,0 +1,56 @@
+.form {
+  margin-left: 36px;
+  margin-right: 36px;
+  width: 100%;
+}
+
+.form__EditarPerfil {
+  color: black;
+  font-size: 1.5rem;
+  line-height: 1.22;
+  font-weight: 900;
+}
+
+.form__field1 {
+  display: block;
+  width: 100%;
+  height: 27px;
+  margin-bottom: 29px;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.form__field2 {
+  height: 27px;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+
+  width: 100%;
+}
+
+.form__SubmitButton {
+  background-color: rgba(0, 0, 0, 1);
+  color: white;
+  width: 100%;
+  margin-right: 36px;
+  height: 50px;
+  margin-top: 48px;
+  line-height: 1.21;
+  font-size: 1.21rem;
+}
+
+.form__SubmitButton:hover {
+  opacity: 80%;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 544px) {
+  .form {
+    width: fit-content;
+  }
+}

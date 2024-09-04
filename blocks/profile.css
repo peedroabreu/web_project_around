@@ -1,0 +1,119 @@
+.profile {
+  padding-top: 20px;
+  display: flex;
+  width: max-content;
+  margin: 0 auto;
+}
+
+.profile__image {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+}
+
+.profile__info {
+  padding-left: 30px;
+  padding-bottom: 0;
+  display: flex;
+}
+
+.profile__info_name {
+  font-weight: 500;
+  font-size: 2.62rem;
+  line-height: 1.15;
+  margin-bottom: 0;
+}
+
+.profile__info_profession {
+  font-weight: 400;
+  font-size: 1.12rem;
+  line-height: 1.21;
+}
+
+.profile__EditButton {
+  width: 24px;
+  height: 24px;
+  border: 1px solid rgba(255, 255, 255, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  margin-left: 18px;
+  margin-top: 56px;
+}
+
+.profile__EditButton:hover {
+  opacity: 60%;
+}
+
+.profile__imagemseta {
+  width: 10px;
+  height: 10px;
+}
+
+.profile__AddButton {
+  border: 2px solid rgba(255, 255, 255, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  margin-left: 115px;
+  margin-top: 65px;
+  height: 50px;
+}
+
+.profile__AddButton:hover {
+  cursor: pointer;
+  opacity: 80%;
+}
+
+.profile__AddButton_Container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+}
+
+@media screen and (max-width: 1024px) {
+  .profile {
+  }
+}
+
+@media screen and (max-width: 544px) {
+  .profile {
+    display: grid;
+    width: fit-content;
+  }
+
+  .profile__image {
+    margin: 0 auto;
+  }
+
+  .profile__info_name {
+    font-size: 1.3rem;
+  }
+
+  .profile__EditButton {
+    grid-column: 2;
+    margin-top: 24px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .profile__AddButton {
+    margin-left: 0;
+    margin-top: 0;
+  }
+
+  .profile__info {
+    display: grid;
+  }
+
+  .profile__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
