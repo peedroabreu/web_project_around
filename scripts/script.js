@@ -1,5 +1,6 @@
 let openButton = document.querySelector(".profile__EditButton");
 let popup = document.querySelector(".popup");
+let overlay = document.querySelector(".overlay");
 let closeButton = document.querySelector(".popup__CloseIcon");
 
 let inputField1 = document.querySelector(".form__field1");
@@ -19,10 +20,15 @@ function updateFormFields() {
 openButton.addEventListener("click", function () {
   updateFormFields();
   popup.classList.add("popup_opened");
+  overlay.style.display = "block";
 });
-closeButton.addEventListener("click", function () {
+function closePopup() {
   popup.classList.remove("popup_opened");
-});
+  overlay.style.display = "none";
+}
+
+closeButton.addEventListener("click", closePopup);
+overlay.addEventListener("click", closePopup);
 
 let formElement = document.querySelector(".form");
 
@@ -41,7 +47,7 @@ function handleProfileFormSubmit(evt) {
   nameDisplay.textContent = nameValue;
   jobDisplay.textContent = jobValue;
 
-  popup.classList.remove("popup_opened");
+  closePopup();
 }
 
 formElement.addEventListener("submit", handleProfileFormSubmit);

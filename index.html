@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,6 +14,7 @@
 
   <body>
     <div class="page">
+      <div class="overlay" id="overlay"></div>
       <header class="header">
         <img
           src="./images/header__logo.svg"
@@ -23,14 +24,16 @@
       </header>
       <main class="content">
         <section class="profile">
-          <img
-            src="./images/image-profile.jpg"
-            alt="imagem pessoa idosa com gorro vermelho"
-            class="profile__image"
-          />
+          <div class="profile__avatar">
+            <img
+              src="./images/image-profile.jpg"
+              alt="imagem pessoa idosa com gorro vermelho"
+              class="profile__image"
+            />
+          </div>
 
           <div class="profile__info">
-            <div class="profile__box">
+            <div>
               <p class="profile__info_name">Jacques Cousteau</p>
               <p class="profile__info_profession">Explorador</p>
             </div>
@@ -58,7 +61,6 @@
                 </form>
               </div>
             </div>
-
             <div class="profile__EditButton">
               <img
                 src="./images/Vector-profile.png"
@@ -66,14 +68,13 @@
                 class="profile__imagemseta"
               />
             </div>
-            <div class="profile__AddButton">
-              <div class="profile__AddButton_Container">
-                <img
-                  src="./images/AddBotton.png"
-                  alt="imagem adicionar botao"
-                />
-              </div>
-            </div>
+          </div>
+          <div class="profile__AddButton">
+            <img
+              src="./images/AddBotton.png"
+              alt="imagem adicionar botao"
+              class="profile__AddButton_Container"
+            />
           </div>
         </section>
 
