@@ -30,6 +30,27 @@
   position: relative;
 }
 
+.popupadd {
+  max-width: 26.8rem;
+  border: 1px solid rgba(0, 0, 0, 1);
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 1);
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  display: none;
+  font-family: inter;
+  position: fixed;
+  height: 330px;
+  align-items: center;
+  margin-top: 57px;
+  left: 35%;
+  z-index: 1000;
+}
+
+.popupadd__opened {
+  display: flex;
+}
+
 .popup__CloseIcon {
   position: absolute;
   top: -84px;
@@ -41,8 +62,53 @@
   cursor: pointer;
 }
 
-.popup_opened {
+.popupadd__CloseIcon {
+  position: absolute;
+  top: -41px;
+  right: -8px;
+}
+
+.popupadd__CloseIcon:hover {
+  opacity: 60%;
+  cursor: pointer;
+}
+
+.popup__content {
+  max-width: 75vw;
+  max-height: 75vh;
+  position: relative;
+}
+
+.popup-image {
   display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.popup__image {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
+.popup__fechar {
+  position: absolute;
+  left: 95%;
+  top: -5%;
+  cursor: pointer;
+}
+
+.popup__fechar:hover {
+  opacity: 50%;
+}
+
+.popup_opened {
+  display: flex; /* Ou block, dependendo do seu design */
 }
 
 @media screen and (max-width: 1024px) {
@@ -62,5 +128,17 @@
 
   .popup__CloseIcon {
     right: -4px;
+  }
+
+  .popup__fechar {
+    top: -17%;
+  }
+
+  .popupadd {
+    left: 0;
+  }
+
+  .popupadd__CloseIcon {
+    right: 0;
   }
 }

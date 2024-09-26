@@ -76,117 +76,65 @@
               class="profile__AddButton_Container"
             />
           </div>
-        </section>
 
-        <section class="elements">
-          <div class="element">
-            <div class="element__one">
+          <div class="popupadd" id="popupadd">
+            <div class="popupadd__container">
               <img
-                src="./images/foto1.png"
-                alt="foto Vale de Yosemite"
-                class="element__picture"
+                src="./images/Close-Icon.png"
+                alt="imagem para fechar o popup"
+                class="popupadd__CloseIcon"
               />
-              <div class="element__group">
-                <p class="element__phrase">Vale de Yosemite</p>
-                <img
-                  src="./images/heart.png"
-                  alt="imagem coracao"
-                  class="element__heart"
+              <form class="formadd">
+                <h1 class="form__EditarPerfil">Novo local</h1>
+                <input
+                  class="formadd__field1"
+                  type="text"
+                  placeholder="Titulo"
                 />
-              </div>
-            </div>
-          </div>
-
-          <div class="element">
-            <div class="element__two">
-              <img
-                src="./images/foto2.png"
-                alt="foto lago Louise"
-                class="element__picture"
-              />
-              <div class="element__group">
-                <p class="element__phrase">Lago Louise</p>
-                <img
-                  src="./images/heart.png"
-                  alt="imagem coracao"
-                  class="element__heart"
+                <input
+                  class="formadd__field2"
+                  type="text"
+                  placeholder="Link de imagem"
                 />
-              </div>
-            </div>
-          </div>
-
-          <div class="element">
-            <div class="element__three">
-              <img
-                src="./images/foto3.png"
-                alt="foto Montanhas Care... "
-                class="element__picture"
-              />
-              <div class="element__group">
-                <p class="element__phrase">Montanhas Care...</p>
-                <img
-                  src="./images/heart.png"
-                  alt="imagem coracao"
-                  class="element__heart"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div class="element">
-            <div class="element__four">
-              <img
-                src="./images/foto4.png"
-                alt="foto Latemar "
-                class="element__picture"
-              />
-              <div class="element__group">
-                <p class="element__phrase">Latemar</p>
-                <img
-                  src="./images/heart.png"
-                  alt="imagem coracao"
-                  class="element__heart"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div class="element">
-            <div class="element__five">
-              <img
-                src="./images/foto5.png"
-                alt="foto Parque Nacional... "
-                class="element__picture"
-              />
-              <div class="element__group">
-                <p class="element__phrase">Parque Nacional...</p>
-                <img
-                  src="./images/heart.png"
-                  alt="imagem coracao"
-                  class="element__heart"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div class="element">
-            <div class="element__six">
-              <img
-                src="./images/foto6.png"
-                alt="foto Lago di Braies "
-                class="element__picture"
-              />
-              <div class="element__group">
-                <p class="element__phrase">Lago di Braies</p>
-                <img
-                  src="./images/heart.png"
-                  alt="imagem coracao"
-                  class="element__heart"
-                />
-              </div>
+                <input class="form__SubmitButton" type="submit" value="criar" />
+              </form>
             </div>
           </div>
         </section>
+
+        <template id="cardTemplate">
+          <div class="element">
+            <img
+              src="./images/trash.png"
+              alt="imamge lixeira"
+              class="element__trash"
+            />
+
+            <div class="element__group">
+              <img class="element__picture" />
+              <p class="element__phrase"></p>
+              <img
+                src="./images/heart.png"
+                alt="imagem coração"
+                class="element__heart"
+              />
+            </div>
+          </div>
+        </template>
+
+        <div class="popup-image" id="popupImage" style="display: none">
+          <div class="popup__content">
+            <img
+              src="./images/Close-Icon.png"
+              alt="botao de fechar"
+              class="popup__fechar"
+            />
+            <img class="popup__image" alt="Imagem do cartão" />
+            <p class="popup__caption"></p>
+          </div>
+        </div>
+
+        <section class="elements" id="elementsContainer"></section>
 
         <footer class="footer">
           <p class="footer__text">© 2024 Around The U.S.</p>

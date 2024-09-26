@@ -41,6 +41,7 @@
   box-sizing: border-box;
   margin-left: 18px;
   margin-top: 56px;
+  cursor: pointer;
 }
 
 .profile__EditButton:hover {

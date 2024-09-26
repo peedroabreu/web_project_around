@@ -1,61 +1,149 @@
-let openButton = document.querySelector(".profile__EditButton");
-let popup = document.querySelector(".popup");
-let overlay = document.querySelector(".overlay");
-let closeButton = document.querySelector(".popup__CloseIcon");
+document.addEventListener("DOMContentLoaded", function () {
+  let openButton = document.querySelector(".profile__EditButton");
+  let popup = document.querySelector(".popup");
+  let popupAdd = document.querySelector(".popupadd");
+  let overlay = document.querySelector(".overlay");
+  let closeButton = document.querySelector(".popup__CloseIcon");
+  let closeAddButton = document.querySelector(".popupadd__CloseIcon");
+  let closePopupButton = document.querySelector(".popup__fechar");
 
-let inputField1 = document.querySelector(".form__field1");
-let inputField2 = document.querySelector(".form__field2");
+  let inputField1 = document.querySelector(".form__field1");
+  let inputField2 = document.querySelector(".form__field2");
+  let profileName = document.querySelector(".profile__info_name");
+  let profileProfession = document.querySelector(".profile__info_profession");
+  let openAddButton = document.querySelector(".profile__AddButton");
 
-let profileName = document.querySelector(".profile__info_name");
-let profileProfession = document.querySelector(".profile__info_profession");
+  function updateFormFields() {
+    inputField1.value = profileName.textContent.trim();
+    inputField2.value = profileProfession.textContent.trim();
+  }
 
-function updateFormFields() {
-  let profileNameUpdate = profileName.textContent.trim();
-  let profileProfessionUpdate = profileProfession.textContent.trim();
+  // Abrir popup de edição de perfil
+  openButton.addEventListener("click", function () {
+    updateFormFields();
+    console.log("Botão de edição clicado!");
+    popup.classList.add("popup_opened");
+    overlay.style.display = "block"; // Mostra o overlay
+  });
 
-  inputField1.value = profileNameUpdate;
-  inputField2.value = profileProfessionUpdate;
-}
+  // Fechar popups
+  function closePopup() {
+    popup.classList.remove("popup_opened");
+    popupAdd.classList.remove("popup_opened");
+    overlay.style.display = "none";
+    document.getElementById("popupImage").style.display = "none"; // Fechar popup de imagem
+  }
 
-openButton.addEventListener("click", function () {
-  updateFormFields();
-  popup.classList.add("popup_opened");
-  overlay.style.display = "block";
-});
-function closePopup() {
-  popup.classList.remove("popup_opened");
-  overlay.style.display = "none";
-}
+  // Adicionar listeners para fechar popups
+  closeButton.addEventListener("click", closePopup);
+  closeAddButton.addEventListener("click", closePopup);
+  overlay.addEventListener("click", closePopup);
+  closePopupButton.addEventListener("click", closePopup);
 
-closeButton.addEventListener("click", closePopup);
-overlay.addEventListener("click", closePopup);
+  // Formulário de edição de perfil
+  let formElement = document.querySelector(".form");
+  formElement.addEventListener("submit", function (evt) {
+    evt.preventDefault();
+    profileName.textContent = inputField1.value;
+    profileProfession.textContent = inputField2.value;
+    closePopup();
+  });
 
-let formElement = document.querySelector(".form");
+  const initialCards = [
+    {
+      name: "Vale de Yosemite",
+      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
+    },
+    {
+      name: "Lago Louise",
+      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
+    },
+    {
+      name: "Montanhas Carecas",
+      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_bald-mountains.jpg",
+    },
+    {
+      name: "Latemar",
+      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
+    },
+    {
+      name: "Parque Nacional da Vanoise ",
+      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
+    },
+    {
+      name: "Lago di Braies",
+      link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lago.jpg",
+    },
+  ];
 
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
+  function renderCards() {
+    const elementsContainer = document.getElementById("elementsContainer");
+    const template = document.getElementById("cardTemplate").content;
 
-  let nameInput = document.querySelector(".form__field1");
-  let jobInput = document.querySelector(".form__field2");
+    while (elementsContainer.firstChild) {
+      elementsContainer.removeChild(elementsContainer.firstChild);
+    }
 
-  let nameValue = nameInput.value;
-  let jobValue = jobInput.value;
+    initialCards.forEach((card, index) => {
+      const cardElement = document.importNode(template, true);
+      const image = cardElement.querySelector(".element__picture");
+      const description = cardElement.querySelector(".element__phrase");
+      const heart = cardElement.querySelector(".element__heart");
+      const deleteCard = cardElement.querySelector(".element__trash");
 
-  let nameDisplay = document.querySelector(".profile__info_name");
-  let jobDisplay = document.querySelector(".profile__info_profession");
+      image.src = card.link;
+      image.alt = card.name;
+      description.textContent = card.name;
 
-  nameDisplay.textContent = nameValue;
-  jobDisplay.textContent = jobValue;
+      // Abrir o popup da imagem
+      image.addEventListener("click", () => {
+        const popupImage = document.getElementById("popupImage");
+        const popupImageElement = popupImage.querySelector(".popup__image");
+        const popupCaption = popupImage.querySelector(".popup__caption");
 
-  closePopup();
-}
+        popupImageElement.src = card.link;
+        popupCaption.textContent = card.name;
+        popupImage.style.display = "flex"; // Mostra o popup da imagem
+        overlay.style.display = "block"; // Mostra o overlay
+      });
 
-formElement.addEventListener("submit", handleProfileFormSubmit);
+      // Adiciona o evento ao coração
+      heart.addEventListener("click", () => {
+        heart.classList.toggle("clicked");
+      });
 
-const hearts = document.querySelectorAll(".element__heart");
+      // Exclusão
+      deleteCard.addEventListener("click", () => {
+        initialCards.splice(index, 1);
+        renderCards();
+      });
 
-hearts.forEach((heart) => {
-  heart.addEventListener("click", () => {
-    heart.classList.toggle("clicked");
+      elementsContainer.appendChild(cardElement);
+    });
+  }
+
+  renderCards();
+
+  openAddButton.addEventListener("click", function () {
+    popupAdd.classList.add("popup_opened");
+    overlay.style.display = "block"; // Mostra o overlay
+  });
+
+  const addCardForm = document.querySelector(".formadd");
+  addCardForm.addEventListener("submit", function (evt) {
+    evt.preventDefault();
+    const cardName = document.querySelector(".formadd__field1").value;
+    const cardLink = document.querySelector(".formadd__field2").value;
+
+    initialCards.unshift({ name: cardName, link: cardLink });
+    renderCards();
+    closePopup();
+  });
+
+  // Fechar popup de imagem
+  const popupClose = document.querySelector(".popup__close");
+  popupClose.addEventListener("click", () => {
+    document.getElementById("popupImage").style.display = "none";
+    overlay.style.display = "none"; // Ocultar o overlay também
   });
 });

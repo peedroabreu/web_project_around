@@ -3,6 +3,11 @@
   margin-right: 36px;
 }
 
+.formadd {
+  margin-left: 36px;
+  margin-right: 36px;
+}
+
 .form__EditarPerfil {
   color: black;
   font-size: 1.5rem;
@@ -21,7 +26,28 @@
   border-right: none;
 }
 
+.formadd__field1 {
+  display: block;
+  width: 100%;
+  height: 27px;
+  margin-bottom: 29px;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
 .form__field2 {
+  height: 27px;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+
+  width: 100%;
+}
+
+.formadd__field2 {
   height: 27px;
   border-bottom: 1px solid rgba(0, 0, 0, 1);
   border-top: none;
