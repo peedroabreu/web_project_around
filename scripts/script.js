@@ -1,17 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let openButton = document.querySelector(".profile__EditButton");
-  let popup = document.querySelector(".popup");
-  let popupAdd = document.querySelector(".popupadd");
-  let overlay = document.querySelector(".overlay");
-  let closeButton = document.querySelector(".popup__CloseIcon");
-  let closeAddButton = document.querySelector(".popupadd__CloseIcon");
-  let closePopupButton = document.querySelector(".popup__fechar");
+  const openButton = document.querySelector(".profile__EditButton");
+  const popup = document.querySelector(".popup");
+  const popupAdd = document.querySelector(".popupadd");
+  const overlay = document.querySelector(".overlay");
+  const closeButton = document.querySelector(".popup__CloseIcon");
+  const closeAddButton = document.querySelector(".popupadd__CloseIcon");
+  const closePopupButton = document.querySelector(".popup__fechar");
 
-  let inputField1 = document.querySelector(".form__field1");
-  let inputField2 = document.querySelector(".form__field2");
-  let profileName = document.querySelector(".profile__info_name");
-  let profileProfession = document.querySelector(".profile__info_profession");
-  let openAddButton = document.querySelector(".profile__AddButton");
+  const inputField1 = document.querySelector(".form__field1");
+  const inputField2 = document.querySelector(".form__field2");
+  const profileName = document.querySelector(".profile__info_name");
+  const profileProfession = document.querySelector(".profile__info_profession");
+  const openAddButton = document.querySelector(".profile__AddButton");
 
   function updateFormFields() {
     inputField1.value = profileName.textContent.trim();
