@@ -16,7 +16,6 @@
 }
 
 .form__field1 {
-  display: block;
   width: 100%;
   height: 27px;
   margin-bottom: 29px;
@@ -24,6 +23,37 @@
   border-top: none;
   border-left: none;
   border-right: none;
+  box-sizing: border-box;
+}
+
+.form__field2 {
+  height: 27px;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  height: 44px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.form__input_type_error {
+  border-bottom-color: #ff0000;
+}
+
+.form__error_active {
+  color: red;
+  font-size: 12px;
+  visibility: visible;
+  max-width: 164px;
+  height: 16px;
+}
+
+.form__error {
+  display: none;
+  width: 164px;
+  height: 16px;
+  visibility: hidden;
 }
 
 .formadd__field1 {
@@ -35,16 +65,6 @@
   border-top: none;
   border-left: none;
   border-right: none;
-}
-
-.form__field2 {
-  height: 27px;
-  border-bottom: 1px solid rgba(0, 0, 0, 1);
-  border-top: none;
-  border-left: none;
-  border-right: none;
-
-  width: 100%;
 }
 
 .formadd__field2 {
@@ -72,6 +92,23 @@
   opacity: 80%;
   border-radius: 2px;
   cursor: pointer;
+}
+
+.form__SubmitButton:disabled {
+  background-color: white;
+  cursor: not-allowed;
+  color: black;
+}
+
+.field_disabled {
+  border-bottom: 1px solid #ff0000;
+  background-color: #ffffff;
+  color: black;
+  cursor: none;
+}
+
+.field_active {
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
 }
 
 @media screen and (max-width: 544px) {

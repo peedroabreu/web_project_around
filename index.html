@@ -45,18 +45,35 @@
                   alt="imagem para fechar o popup"
                   class="popup__CloseIcon"
                 />
-                <form class="form">
+                <form class="form" novalidate>
                   <h1 class="form__EditarPerfil">Editar perfil</h1>
-                  <input class="form__field1" type="text" placeholder="Nome" />
+                  <input
+                    class="form__field1"
+                    type="text"
+                    placeholder="Nome"
+                    name="Name"
+                    minlength="2"
+                    maxlength="40"
+                    required
+                  />
+                  <span class="form__error" id="errorName"></span>
+
                   <input
                     class="form__field2"
                     type="text"
                     placeholder="Sobre mim"
+                    name="About"
+                    minlength="2"
+                    maxlength="200"
+                    required
                   />
+                  <span class="form__error" id="errorAbout"></span>
+
                   <input
                     class="form__SubmitButton"
                     type="submit"
                     value="Salvar"
+                    disabled
                   />
                 </form>
               </div>
@@ -90,12 +107,20 @@
                   class="formadd__field1"
                   type="text"
                   placeholder="Titulo"
+                  required
+                  maxlength="30"
                 />
+
+                <span id="errorField1" class="form__error"></span>
+
                 <input
                   class="formadd__field2"
-                  type="text"
+                  type="url"
                   placeholder="Link de imagem"
+                  required
                 />
+                <span id="errorField2" class="form__error"></span>
+
                 <input class="form__SubmitButton" type="submit" value="criar" />
               </form>
             </div>
@@ -103,7 +128,7 @@
         </section>
 
         <template id="cardTemplate">
-          <div class="element">
+          <div class="element" id="elemento">
             <img
               src="./images/trash.png"
               alt="imamge lixeira"

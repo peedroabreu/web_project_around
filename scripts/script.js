@@ -3,45 +3,144 @@ document.addEventListener("DOMContentLoaded", function () {
   const popup = document.querySelector(".popup");
   const popupAdd = document.querySelector(".popupadd");
   const overlay = document.querySelector(".overlay");
+
+  const popupImage = document.getElementById("popupImage");
+  const popupImageElement = popupImage.querySelector(".popup__image");
+  const popupCaption = popupImage.querySelector(".popup__caption");
+
   const closeButton = document.querySelector(".popup__CloseIcon");
   const closeAddButton = document.querySelector(".popupadd__CloseIcon");
   const closePopupButton = document.querySelector(".popup__fechar");
 
+  const formElement = document.querySelector(".form");
   const inputField1 = document.querySelector(".form__field1");
   const inputField2 = document.querySelector(".form__field2");
+  const submitButton = document.querySelector(".form__SubmitButton");
+
   const profileName = document.querySelector(".profile__info_name");
   const profileProfession = document.querySelector(".profile__info_profession");
   const openAddButton = document.querySelector(".profile__AddButton");
 
+  const errorName = document.querySelector("#errorName");
+  const errorAbout = document.querySelector("#errorAbout");
+
+  const inputField1add = document.querySelector(".formadd__field1");
+  const inputField2add = document.querySelector(".formadd__field2");
+  const errorField1add = document.querySelector("#errorField1");
+  const errorField2add = document.querySelector("#errorField2");
+
+  function showErrorMessage(inputField, errorSpan) {
+    inputField.addEventListener("input", function (evt) {
+      evt.preventDefault();
+
+      if (
+        !inputField.validity.valid ||
+        (inputField === inputField2add && !validateURL(inputField.value))
+      ) {
+        errorSpan.textContent =
+          inputField.validationMessage || "Por favor, insira uma URL válida.";
+        errorSpan.classList.add("form__error_active");
+        errorSpan.classList.remove("form__error");
+        inputField.classList.add("form__input_type_error");
+      } else {
+        errorSpan.textContent = "";
+        errorSpan.classList.remove("form__error_active");
+        inputField.classList.remove("form__input_type_error");
+      }
+    });
+
+    inputField.addEventListener("input", function () {
+      if (inputField.validity.valid) {
+        errorSpan.textContent = "";
+        errorSpan.classList.remove("form__error_active");
+        errorSpan.classList.add("form__error");
+      }
+    });
+  }
+
+  function validateURL(url) {
+    const urlPattern = /^(https?:\/\/)?([a-z0-9\-]+\.)+[a-z]{2,6}(\/\S*)?$/i;
+    return urlPattern.test(url);
+  }
+
+  function validateForm() {
+    const isNameOk = inputField1.checkValidity();
+    const isAboutOk = inputField2.checkValidity();
+    const isField1AddOk = inputField1add.checkValidity();
+    const isField2AddOk = validateURL(inputField2add.value);
+    const isAddFieldsFilled =
+      inputField1add.value.trim() !== "" && inputField2add.value.trim() !== "";
+
+    submitButton.disabled = !(isNameOk && isAboutOk);
+
+    const addSubmitButton = document.querySelector(
+      ".formadd .form__SubmitButton"
+    );
+    if (addSubmitButton) {
+      addSubmitButton.disabled = !(
+        isField1AddOk &&
+        isField2AddOk &&
+        isAddFieldsFilled
+      );
+    }
+  }
+
+  inputField1.addEventListener("input", validateForm);
+  inputField2.addEventListener("input", validateForm);
+  inputField1add.addEventListener("input", validateForm);
+  inputField2add.addEventListener("input", validateForm);
+
+  showErrorMessage(inputField1, errorName);
+  showErrorMessage(inputField1add, errorField1add);
+  showErrorMessage(inputField2, errorAbout);
+  showErrorMessage(inputField2add, errorField2add);
+
+  inputField2add.addEventListener("input", function () {
+    const isValid = validateURL(this.value);
+    if (!isValid) {
+      errorField2add.textContent = "Por favor, insira uma URL válida.";
+      errorField2add.classList.add("form__error_active");
+    } else {
+      errorField2add.textContent = "";
+      errorField2add.classList.remove("form__error_active");
+    }
+    validateForm();
+  });
+
   function updateFormFields() {
     inputField1.value = profileName.textContent.trim();
     inputField2.value = profileProfession.textContent.trim();
+    validateForm();
   }
 
-  // Abrir popup de edição de perfil
   openButton.addEventListener("click", function () {
     updateFormFields();
-    console.log("Botão de edição clicado!");
     popup.classList.add("popup_opened");
-    overlay.style.display = "block"; // Mostra o overlay
+
+    overlay.style.display = "block";
   });
 
-  // Fechar popups
+  closePopupButton.addEventListener("click", () => {
+    document.getElementById("popupImage").style.display = "none";
+    overlay.style.display = "none";
+  });
+
   function closePopup() {
     popup.classList.remove("popup_opened");
     popupAdd.classList.remove("popup_opened");
+    popupImage.classList.remove("popup_opened");
+
     overlay.style.display = "none";
-    document.getElementById("popupImage").style.display = "none"; // Fechar popup de imagem
   }
 
-  // Adicionar listeners para fechar popups
   closeButton.addEventListener("click", closePopup);
   closeAddButton.addEventListener("click", closePopup);
-  overlay.addEventListener("click", closePopup);
   closePopupButton.addEventListener("click", closePopup);
 
-  // Formulário de edição de perfil
-  let formElement = document.querySelector(".form");
+  overlay.addEventListener("click", function (evt) {
+    closePopup();
+  });
+
   formElement.addEventListener("submit", function (evt) {
     evt.preventDefault();
     profileName.textContent = inputField1.value;
@@ -67,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
       link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_latemar.jpg",
     },
     {
-      name: "Parque Nacional da Vanoise ",
+      name: "Parque Nacional da Vanoise",
       link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_vanoise.jpg",
     },
     {
@@ -95,24 +194,18 @@ document.addEventListener("DOMContentLoaded", function () {
       image.alt = card.name;
       description.textContent = card.name;
 
-      // Abrir o popup da imagem
       image.addEventListener("click", () => {
-        const popupImage = document.getElementById("popupImage");
-        const popupImageElement = popupImage.querySelector(".popup__image");
-        const popupCaption = popupImage.querySelector(".popup__caption");
-
         popupImageElement.src = card.link;
         popupCaption.textContent = card.name;
-        popupImage.style.display = "flex"; // Mostra o popup da imagem
-        overlay.style.display = "block"; // Mostra o overlay
+        popupImage.classList.add("popup_opened");
+        popupImage.style.display = "flex";
+        overlay.style.display = "block";
       });
 
-      // Adiciona o evento ao coração
       heart.addEventListener("click", () => {
         heart.classList.toggle("clicked");
       });
 
-      // Exclusão
       deleteCard.addEventListener("click", () => {
         initialCards.splice(index, 1);
         renderCards();
@@ -126,24 +219,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
   openAddButton.addEventListener("click", function () {
     popupAdd.classList.add("popup_opened");
-    overlay.style.display = "block"; // Mostra o overlay
+    overlay.style.display = "block";
   });
 
   const addCardForm = document.querySelector(".formadd");
   addCardForm.addEventListener("submit", function (evt) {
     evt.preventDefault();
-    const cardName = document.querySelector(".formadd__field1").value;
-    const cardLink = document.querySelector(".formadd__field2").value;
+    const cardName = inputField1add.value;
+    const cardLink = inputField2add.value;
 
     initialCards.unshift({ name: cardName, link: cardLink });
     renderCards();
     closePopup();
-  });
-
-  // Fechar popup de imagem
-  const popupClose = document.querySelector(".popup__close");
-  popupClose.addEventListener("click", () => {
-    document.getElementById("popupImage").style.display = "none";
-    overlay.style.display = "none"; // Ocultar o overlay também
   });
 });
