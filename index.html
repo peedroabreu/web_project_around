@@ -14,6 +14,87 @@
 
   <body>
     <div class="page">
+      <div class="popup" id="popup">
+        <img
+          src="./images/Close-Icon.png"
+          alt="imagem para fechar o popup"
+          class="popup__CloseIcon"
+        />
+        <form class="form" novalidate>
+          <h1 class="form__EditarPerfil">Editar perfil</h1>
+          <input
+            class="form__field1"
+            type="text"
+            placeholder="Nome"
+            name="Name"
+            minlength="2"
+            maxlength="40"
+            required
+          />
+          <span class="form__error" id="errorName"></span>
+
+          <input
+            class="form__field2"
+            type="text"
+            placeholder="Sobre mim"
+            name="About"
+            minlength="2"
+            maxlength="200"
+            required
+          />
+          <span class="form__error" id="errorAbout"></span>
+
+          <input
+            class="form__SubmitButton"
+            type="submit"
+            value="Salvar"
+            disabled
+          />
+        </form>
+      </div>
+
+      <div class="popupadd" id="popupadd">
+        <img
+          src="./images/Close-Icon.png"
+          alt="imagem para fechar o popup"
+          class="popupadd__CloseIcon"
+        />
+        <form class="formadd">
+          <h1 class="form__EditarPerfil">Novo local</h1>
+          <input
+            class="formadd__field1"
+            type="text"
+            placeholder="Titulo"
+            required
+            maxlength="30"
+          />
+
+          <span id="errorField1" class="form__error"></span>
+
+          <input
+            class="formadd__field2"
+            type="url"
+            placeholder="Link de imagem"
+            required
+          />
+          <span id="errorField2" class="form__error"></span>
+
+          <input class="form__SubmitButton" type="submit" value="criar" />
+        </form>
+      </div>
+
+      <div class="popup-image" id="popupImage">
+        <div class="popup__content">
+          <img
+            src="./images/Close-Icon.png"
+            alt="botao de fechar"
+            class="popup__fechar"
+          />
+          <img class="popup__image" alt="Imagem do cartão" />
+          <p class="popup__caption"></p>
+        </div>
+      </div>
+
       <div class="overlay" id="overlay"></div>
       <header class="header">
         <img
@@ -38,46 +119,6 @@
               <p class="profile__info_profession">Explorador</p>
             </div>
 
-            <div class="popup" id="popup">
-              <div class="popup__container">
-                <img
-                  src="./images/Close-Icon.png"
-                  alt="imagem para fechar o popup"
-                  class="popup__CloseIcon"
-                />
-                <form class="form" novalidate>
-                  <h1 class="form__EditarPerfil">Editar perfil</h1>
-                  <input
-                    class="form__field1"
-                    type="text"
-                    placeholder="Nome"
-                    name="Name"
-                    minlength="2"
-                    maxlength="40"
-                    required
-                  />
-                  <span class="form__error" id="errorName"></span>
-
-                  <input
-                    class="form__field2"
-                    type="text"
-                    placeholder="Sobre mim"
-                    name="About"
-                    minlength="2"
-                    maxlength="200"
-                    required
-                  />
-                  <span class="form__error" id="errorAbout"></span>
-
-                  <input
-                    class="form__SubmitButton"
-                    type="submit"
-                    value="Salvar"
-                    disabled
-                  />
-                </form>
-              </div>
-            </div>
             <div class="profile__EditButton">
               <img
                 src="./images/Vector-profile.png"
@@ -92,38 +133,6 @@
               alt="imagem adicionar botao"
               class="profile__AddButton_Container"
             />
-          </div>
-
-          <div class="popupadd" id="popupadd">
-            <div class="popupadd__container">
-              <img
-                src="./images/Close-Icon.png"
-                alt="imagem para fechar o popup"
-                class="popupadd__CloseIcon"
-              />
-              <form class="formadd">
-                <h1 class="form__EditarPerfil">Novo local</h1>
-                <input
-                  class="formadd__field1"
-                  type="text"
-                  placeholder="Titulo"
-                  required
-                  maxlength="30"
-                />
-
-                <span id="errorField1" class="form__error"></span>
-
-                <input
-                  class="formadd__field2"
-                  type="url"
-                  placeholder="Link de imagem"
-                  required
-                />
-                <span id="errorField2" class="form__error"></span>
-
-                <input class="form__SubmitButton" type="submit" value="criar" />
-              </form>
-            </div>
           </div>
         </section>
 
@@ -146,18 +155,6 @@
             </div>
           </div>
         </template>
-
-        <div class="popup-image" id="popupImage" style="display: none">
-          <div class="popup__content">
-            <img
-              src="./images/Close-Icon.png"
-              alt="botao de fechar"
-              class="popup__fechar"
-            />
-            <img class="popup__image" alt="Imagem do cartão" />
-            <p class="popup__caption"></p>
-          </div>
-        </div>
 
         <section class="elements" id="elementsContainer"></section>
 

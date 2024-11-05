@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const errorField1add = document.querySelector("#errorField1");
   const errorField2add = document.querySelector("#errorField2");
 
+  // Função para exibir mensagens de erro de validação
   function showErrorMessage(inputField, errorSpan) {
     inputField.addEventListener("input", function (evt) {
       evt.preventDefault();
@@ -116,31 +117,34 @@ document.addEventListener("DOMContentLoaded", function () {
   openButton.addEventListener("click", function () {
     updateFormFields();
     popup.classList.add("popup_opened");
-
     overlay.style.display = "block";
   });
 
-  closePopupButton.addEventListener("click", () => {
-    document.getElementById("popupImage").style.display = "none";
-    overlay.style.display = "none";
-  });
-
+  // Função para fechar o popup
   function closePopup() {
     popup.classList.remove("popup_opened");
     popupAdd.classList.remove("popup_opened");
     popupImage.classList.remove("popup_opened");
-
     overlay.style.display = "none";
   }
 
+  // Fechar os popups ao clicar nos botões de fechar
   closeButton.addEventListener("click", closePopup);
   closeAddButton.addEventListener("click", closePopup);
   closePopupButton.addEventListener("click", closePopup);
 
+  // Fechar o popup da imagem ao clicar no overlay
   overlay.addEventListener("click", function (evt) {
     closePopup();
   });
 
+  document.addEventListener("keydown", function (evt) {
+    if (evt.key === "Escape") {
+      closePopup();
+    }
+  });
+
+  // Submit do formulário de perfil
   formElement.addEventListener("submit", function (evt) {
     evt.preventDefault();
     profileName.textContent = inputField1.value;
@@ -148,6 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
     closePopup();
   });
 
+  // Renderizar cartões iniciais
   const initialCards = [
     {
       name: "Vale de Yosemite",
@@ -197,8 +202,8 @@ document.addEventListener("DOMContentLoaded", function () {
       image.addEventListener("click", () => {
         popupImageElement.src = card.link;
         popupCaption.textContent = card.name;
+
         popupImage.classList.add("popup_opened");
-        popupImage.style.display = "flex";
         overlay.style.display = "block";
       });
 
@@ -222,6 +227,7 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay.style.display = "block";
   });
 
+  // Adicionar novo cartão
   const addCardForm = document.querySelector(".formadd");
   addCardForm.addEventListener("submit", function (evt) {
     evt.preventDefault();
