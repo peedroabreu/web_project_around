@@ -39,21 +39,21 @@
 
 .form__input_type_error {
   border-bottom-color: #ff0000;
-}
-
-.form__error_active {
-  color: red;
-  font-size: 12px;
-  visibility: visible;
-  max-width: 164px;
-  height: 16px;
+  min-width: 18.8rem;
 }
 
 .form__error {
   display: none;
   width: 164px;
   height: 16px;
-  visibility: hidden;
+}
+
+.form__error_active {
+  color: red;
+  font-size: 12px;
+  display: block;
+  max-width: 164px;
+  height: 16px;
 }
 
 .formadd__field1 {
