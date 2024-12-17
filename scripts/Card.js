@@ -10,7 +10,7 @@ export class Card {
     return template.querySelector(".element").cloneNode(true);
   }
 
-  _setEventListeners(cardElement) {
+  _setEventListeners(cardElement, handleCardClick) {
     const heart = cardElement.querySelector(".element__heart");
     const deleteButton = cardElement.querySelector(".element__trash");
     const image = cardElement.querySelector(".element__picture");
@@ -27,19 +27,11 @@ export class Card {
 
     // Clique na imagem para abrir no popup
     image.addEventListener("click", () => {
-      const popupImage = document.querySelector("#popupImage");
-      const popupImageElement = popupImage.querySelector(".popup__image");
-      const popupCaption = popupImage.querySelector(".popup__caption");
-
-      popupImageElement.src = this._link;
-      popupCaption.textContent = this._name;
-
-      popupImage.classList.add("popup_opened");
-      document.querySelector(".overlay").style.display = "block";
+      handleCardClick(this._link, this._name); // Passa link e nome para o handler
     });
   }
 
-  _generateCard() {
+  _generateCard(handleCardClick) {
     const cardElement = this._getTemplate();
     const image = cardElement.querySelector(".element__picture");
     const description = cardElement.querySelector(".element__phrase");
@@ -49,12 +41,12 @@ export class Card {
     description.textContent = this._name;
 
     // Adiciona os event listeners ao card
-    this._setEventListeners(cardElement);
+    this._setEventListeners(cardElement, handleCardClick);
 
     return cardElement;
   }
 
-  getCard() {
-    return this._generateCard();
+  getCard(handleCardClick) {
+    return this._generateCard(handleCardClick);
   }
 }

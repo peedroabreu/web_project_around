@@ -1,26 +1,37 @@
 import { Card } from "./Card.js";
+import { Section } from "./Section.js";
 import { FormValidator } from "./FormValidator.js";
-import {
-  openPopup,
-  closePopup,
-  closePopupByEscape,
-  closePopupByClickOnOverlay,
-} from "./utils.js";
+import { Popup } from "./Popup.js";
+import { PopupWithImage } from "./PopupWithImage.js";
+import { PopupWithForm } from "./PopupWithForm.js";
 
 document.addEventListener("DOMContentLoaded", function () {
-  // --------- VARIÁVEIS ---------
-  const openButton = document.querySelector(".profile__EditButton");
-  const popup = document.querySelector(".popup");
-  const popupAdd = document.querySelector(".popupadd");
-  const overlay = document.querySelector(".overlay");
+  const popup = new Popup("#popup", "#overlay");
 
-  const popupImage = document.getElementById("popupImage");
-  const popupImageElement = popupImage.querySelector(".popup__image");
-  const popupCaption = popupImage.querySelector(".popup__caption");
+  // Função de envio de formulário para o popup de adicionar cartão
+  function handleAddCardSubmit(inputValues) {
+    const cardName = inputValues.Name;
+    const cardLink = inputValues.Link;
 
-  const closeButton = document.querySelector(".popup__CloseIcon");
-  const closeAddButton = document.querySelector(".popupadd__CloseIcon");
-  const closePopupButton = document.querySelector(".popup__fechar");
+    // Criação do novo cartão e adição ao array
+    const newCard = { name: cardName, link: cardLink };
+    initialCards.unshift(newCard);
+
+    // Cria o cartão e adiciona diretamente ao topo do container
+    const newCardElement = createCard(newCard);
+    section.addItem(newCardElement);
+
+    section.renderItems();
+  }
+
+  const popupAdd = new PopupWithForm(
+    ".popupadd",
+    "#overlay",
+    handleAddCardSubmit
+  );
+
+  const popupImage = new PopupWithImage(".popup-image", "#overlay");
+  let section;
 
   const formElement = document.querySelector(".form");
   const inputField1 = document.querySelector(".form__field1");
@@ -31,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const profileName = document.querySelector(".profile__info_name");
   const profileProfession = document.querySelector(".profile__info_profession");
   const openAddButton = document.querySelector(".profile__AddButton");
+  const openButton = document.querySelector(".profile__EditButton");
 
   const inputField1add = document.querySelector(".formadd__field1");
   const inputField2add = document.querySelector(".formadd__field2");
@@ -78,59 +90,65 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   ];
 
+  // Função para criar e renderizar cartões
   function renderCards() {
     const elementsContainer = document.getElementById("elementsContainer");
 
-    // Limpar o container de elementos existentes
-    while (elementsContainer.firstChild) {
-      elementsContainer.removeChild(elementsContainer.firstChild);
-    }
-
-    // Renderizar cartões
-    initialCards.forEach((cardData) => {
+    // Função de renderização do card
+    const createCard = (cardData) => {
       const card = new Card(cardData, "#cardTemplate");
-      elementsContainer.appendChild(card.getCard());
-    });
+      // Passa a função de clique diretamente
+      const handleCardClick = (imageSrc, imageAlt) => {
+        popupImage.open(imageSrc, imageAlt);
+      };
+      return card.getCard(handleCardClick); // Passa handleCardClick para o método getCard()
+    };
+
+    // Criação da instância da classe Section
+    section = new Section(
+      {
+        items: initialCards,
+        renderer: (item) => {
+          const cardElement = createCard(item);
+          section.addItem(cardElement);
+        },
+      },
+      ".elements"
+    );
+
+    // Renderiza os cartões ao carregar a página
+    section.renderItems();
   }
 
   renderCards();
 
-  // --------- ABRIR/FECHAR POPUPS ---------
-  closeButton.addEventListener("click", () => closePopup(popup));
-  closeAddButton.addEventListener("click", () => closePopup(popupAdd));
-  closePopupButton.addEventListener("click", () => closePopup(popupImage));
-
-  overlay.addEventListener("click", closePopupByClickOnOverlay);
-  document.addEventListener("keydown", closePopupByEscape);
+  popupImage.close(); // Corrigido para chamar o método close()
 
   // --------- FORMULÁRIOS ---------
   formElement.addEventListener("submit", function (evt) {
     evt.preventDefault();
     profileName.textContent = inputField1.value;
     profileProfession.textContent = inputField2.value;
-    closePopup(popup);
+    popup.close();
   });
 
-  // Adicionar novo cartão
-  addCardForm._formElement.addEventListener("submit", function (evt) {
-    evt.preventDefault();
-    const cardName = inputField1add.value;
-    const cardLink = inputField2add.value;
+  openAddButton.addEventListener("click", () => popupAdd.open());
 
-    initialCards.unshift({ name: cardName, link: cardLink });
-    renderCards();
-    closePopup(popupAdd);
+  openButton.addEventListener("click", () => popup.open());
+
+  overlay.addEventListener("click", (e) => {
+    if (e.target === overlay) {
+      popup.close();
+      popupAdd.close();
+      popupImage.close();
+    }
   });
 
-  // --------- ABRIR POPUP DE ADICIONAR CARTÃO ---------
-  openAddButton.addEventListener("click", function () {
-    openPopup(popupAdd);
-  });
-
-  // --------- ABRIR POPUP DE EDITAR PERFIL ---------
-  openButton.addEventListener("click", function () {
-    inputField2.value = profileProfession.textContent.trim();
-
-    openPopup(popup); // Abre o popup para editar perfil
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      popup.close();
+      popupAdd.close();
+      popupImage.close();
+    }
   });
 });
