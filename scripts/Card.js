@@ -1,8 +1,9 @@
 export class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() {
@@ -27,7 +28,7 @@ export class Card {
 
     // Clique na imagem para abrir no popup
     image.addEventListener("click", () => {
-      handleCardClick(this._link, this._name); // Passa link e nome para o handler
+      this._handleCardClick(this._link, this._name);
     });
   }
 

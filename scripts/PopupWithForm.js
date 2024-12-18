@@ -19,12 +19,19 @@ export class PopupWithForm extends Popup {
   setEventListeners() {
     super.setEventListeners();
 
-    this._form.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-      const inputValues = this._getInputValues();
-      this._handleFormSubmit(inputValues);
-      this.close();
-    });
+    if (this._form) {
+      this._form.addEventListener("submit", (evt) => {
+        evt.preventDefault();
+        const inputValues = this._getInputValues();
+        this._handleFormSubmit(inputValues);
+        this.close();
+      });
+    }
+  }
+
+  open() {
+    super.open();
+    this.setEventListeners();
   }
 
   close() {

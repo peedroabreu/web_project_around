@@ -14,7 +14,7 @@ export class Popup {
     // overlay
     this._overlay = document.querySelector(overlaySelector);
 
-    this._setEventListeners();
+    this.setEventListeners();
   }
 
   open() {
@@ -37,7 +37,7 @@ export class Popup {
     }
   }
 
-  _setEventListeners() {
+  setEventListeners() {
     if (this.closeButton) {
       this.closeButton.addEventListener("click", () => this.close());
     }
